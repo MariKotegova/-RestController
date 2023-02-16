@@ -4,7 +4,10 @@ import org.springframework.stereotype.Repository;
 import ru.netology.exception.NotFoundException;
 import ru.netology.model.Post;
 
-import java.util.*;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -42,13 +45,14 @@ public class PostRepository {
         return post;
     }
 
-    public void removeById(long id) {
+    public void removeById(long id, HttpServletResponse response) {
         if (pos.containsKey(id)) {
             //можно выбрать действие в зависимости от потребностей
             pos.put(id, " null ");// так очищу значение в конкретном id, id будет с пустым значением
             // pos.remove(id);   // так удалю всю позицию и конкретный id
             System.out.println("Позиция id " + id + " удалена");
         } else {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             System.out.println("Такого id нет в списке");
         }
     }

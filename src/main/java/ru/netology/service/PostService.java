@@ -5,6 +5,7 @@ import ru.netology.exception.NotFoundException;
 import ru.netology.model.Post;
 import ru.netology.repository.PostRepository;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Service
@@ -27,8 +28,9 @@ public class PostService {
         return repository.save(post);
     }
 
-    public void removeById(long id) {
-        repository.removeById(id);
+    public void removeById(long id, HttpServletResponse response) {
+
+        repository.removeById(id, response);
     }
 }
 
